@@ -1,13 +1,15 @@
-# Presalano
+# Shopyle
 
-## Getting Started
+Ecommerce web app in node.js, next.js and mongodb
 
-First, run the development server:
+### Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Format code
+
+```bash
+yarn format
+```

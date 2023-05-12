@@ -1,12 +1,10 @@
 {
-  "name": "presalano",
-  "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
     "format": "yarn prettier --write .",
     "format-check": "prettier --check .",
     "prepare": "husky install"
@@ -14,32 +12,9 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/react": "^2.6.1",
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/poppins": "^4.5.10",
-    "@next/font": "13.4.1",
-    "@spacebudz/nebula": "1.0.3",
-    "@types/node": "20.1.2",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "eslint": "8.40.0",
-    "eslint-config-next": "13.4.1",
-    "framer-motion": "^10.12.10",
-    "lucid-cardano": "0.10.1",
-    "next": "13.4.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.9",
-    "react-icons": "^4.8.0",
-    "sweetalert": "^2.1.2",
-    "typescript": "5.0.4"
-  },
   "devDependencies": {
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier": "2.8.8"
+    "lint-staged": "^13.1.1",
+    "prettier": "^2.8.4"
   }
 }
