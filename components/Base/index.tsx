@@ -24,7 +24,7 @@ export default function Base({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Container maxW={'7xl'} mt={mt} p={[5, 0]}>
+      <Container maxW={'7xl'} mt={mt} px={0}>
         {children}
       </Container>
     </>

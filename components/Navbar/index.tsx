@@ -83,9 +83,9 @@ const Footer: NextComponentType = () => {
                   <ChakraNextLink
                     key={idx + '-desktop-nav'}
                     href={link.href}
-                    px={2}
+                    px={3}
                     py={1}
-                    rounded={'md'}
+                    rounded={'full'}
                     fontSize={['1rem', '1rem', '0.6rem', '1rem']}
                     _hover={{
                       textDecoration: 'none',
@@ -109,7 +109,11 @@ const Footer: NextComponentType = () => {
                   )}...${account.slice(100)}`}</Button>
                 ) : (
                   <Button
-                    colorScheme="messenger"
+                    rounded={'full'}
+                    bg={'messenger.500'}
+                    color={'white'}
+                    fontWeight={'normal'}
+                    _hover={{ bg: 'messenger.600' }}
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}
