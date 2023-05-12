@@ -44,7 +44,7 @@ export default function Navbar() {
       <Container
         maxW={'full'}
         bg={useColorModeValue('white', 'gray.900')}
-        border="1px"
+        borderBottom="1px"
         borderColor={useColorModeValue('gray.300', 'gray.700')}
       >
         <Box maxWidth={'7xl'} mx="auto">
@@ -100,7 +100,7 @@ export default function Navbar() {
                   {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                 </Button>
                 {connected ? (
-                  <Button isDisabled={true}>{`${account.slice(
+                  <Button rounded={'full'} isDisabled={true}>{`${account.slice(
                     0,
                     7
                   )}...${account.slice(100)}`}</Button>
