@@ -6,6 +6,7 @@ import {
   Flex,
   Image,
   HStack,
+  Heading,
   IconButton,
   Button,
   useDisclosure,
@@ -25,28 +26,19 @@ const Footer: NextComponentType = () => {
   const { connecting, connectWallet, connected, account } = useWallet()
 
   const hoverColor = useColorModeValue('gray.200', 'gray.700')
-  const logoSrcMd = useColorModeValue('/black_logo.png', '/logo.png')
-  const logoSrcSm = useColorModeValue(
-    '/logo_white_sm.png',
-    '/logo_white_sm.png'
-  )
 
   const Links = [
     {
-      label: 'Marketplace',
-      href: '/marketplace',
+      label: 'Minter',
+      href: '/minter',
     },
     {
-      label: 'Mint NFT',
-      href: '/mint/nft',
+      label: 'Launchpad',
+      href: '/launchpad',
     },
     {
-      label: 'Mint Native Token',
-      href: '/mint/token',
-    },
-    {
-      label: 'Auction NFT',
-      href: '/auction',
+      label: 'Ongoing Sales',
+      href: '/sales',
     },
   ]
 
@@ -55,11 +47,10 @@ const Footer: NextComponentType = () => {
       <Container
         maxW={'full'}
         bg={useColorModeValue('gray.50', 'gray.900')}
-        borderRadius="lg"
         border="1px"
         borderColor={useColorModeValue('gray.300', 'gray.700')}
       >
-        <Box px={4}>
+        <Box maxWidth={'7xl'} mx="auto">
           <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
             <IconButton
               size={'md'}
@@ -77,15 +68,9 @@ const Footer: NextComponentType = () => {
                   fontSize="1.2rem"
                   fontWeight="600"
                 >
-                  <picture>
-                    <source media="(max-width: 768px)" srcSet={logoSrcSm} />
-                    <Image
-                      src={logoSrcMd}
-                      width={['2.5rem', '7rem']}
-                      height={['1.5rem', '2.5rem']}
-                      alt="Logo"
-                    />
-                  </picture>
+                  <Heading as="h1" size="md">
+                    Presalano
+                  </Heading>
                 </ChakraNextLink>
               </Box>
 
@@ -124,7 +109,7 @@ const Footer: NextComponentType = () => {
                   )}...${account.slice(100)}`}</Button>
                 ) : (
                   <Button
-                    colorScheme="blue"
+                    colorScheme="pink"
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}
