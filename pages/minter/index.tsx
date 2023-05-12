@@ -15,7 +15,7 @@ import Base from '../../components/Base'
 
 export default function Minter() {
   return (
-    <Base>
+    <Base title="Presalano: Minter">
       <Stack minH={'70vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
