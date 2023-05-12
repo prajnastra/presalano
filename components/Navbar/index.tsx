@@ -1,10 +1,7 @@
-import type { NextComponentType } from 'next'
-
 import {
   Box,
   Container,
   Flex,
-  Image,
   HStack,
   Heading,
   IconButton,
@@ -20,7 +17,7 @@ import { FaWallet } from 'react-icons/fa'
 import ChakraNextLink from '../ChakraNextLink'
 import { useWallet } from '../../context'
 
-const Footer: NextComponentType = () => {
+export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { connecting, connectWallet, connected, account } = useWallet()
@@ -151,5 +148,3 @@ const Footer: NextComponentType = () => {
     </Box>
   )
 }
-
-export default Footer

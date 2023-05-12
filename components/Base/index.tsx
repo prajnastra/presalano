@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { Container } from '@chakra-ui/react'
 
 import Navbar from '../Navbar'
+import Footer from '../Footer'
 
 interface Props {
   title?: string
@@ -23,10 +24,14 @@ export default function Base({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Navbar />
+
       <Container maxW={'7xl'} mt={mt} px={0}>
         {children}
       </Container>
+
+      <Footer />
     </>
   )
 }
