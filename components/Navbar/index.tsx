@@ -46,7 +46,7 @@ const Footer: NextComponentType = () => {
     <Box pos="fixed" top="0" w="100%" zIndex={10}>
       <Container
         maxW={'full'}
-        bg={useColorModeValue('gray.50', 'gray.900')}
+        bg={useColorModeValue('white', 'gray.900')}
         border="1px"
         borderColor={useColorModeValue('gray.300', 'gray.700')}
       >
@@ -109,7 +109,7 @@ const Footer: NextComponentType = () => {
                   )}...${account.slice(100)}`}</Button>
                 ) : (
                   <Button
-                    colorScheme="pink"
+                    colorScheme="messenger"
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}
