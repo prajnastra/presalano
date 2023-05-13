@@ -11,12 +11,27 @@ const presaleSchema = new Schema<IPresale>(
     },
     description: {
       type: String,
+      maxlength: 100,
+    },
+    policy_id: {
+      type: String,
+    },
+    owner: {
+      type: String,
     },
     total_supply: {
       type: Number,
       default: 0,
     },
-    price_in_ada: {
+    token_per_ada: {
+      type: Number,
+      default: 0,
+    },
+    min_buy: {
+      type: Number,
+      default: 0,
+    },
+    max_buy: {
       type: Number,
       default: 0,
     },

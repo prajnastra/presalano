@@ -3,8 +3,12 @@ import { Document } from 'mongoose'
 export interface IPresale extends Document {
   token_name: string
   description: string
+  policy_id: string
+  owner: string
   total_supply: number
-  price_in_ada: number
+  token_per_ada: number
+  min_buy: number
+  max_buy: number
   website: string
   twitter: string
   discord: string
@@ -12,4 +16,9 @@ export interface IPresale extends Document {
   logo_url: string
   start_time: string
   end_time: string
+}
+
+export interface IMint extends Document {
+  token_name: string
+  total_supply: number
 }
