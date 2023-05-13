@@ -110,7 +110,7 @@ export default function SaleCard({}: Props) {
         </Text>
       </Stack>
 
-      <ChakraNextLink href={`/nft/${''}`}>
+      <ChakraNextLink href={`/sale/${'122'}`}>
         <Button
           w={'full'}
           mt={5}
