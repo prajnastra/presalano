@@ -24,6 +24,10 @@ const presaleSchema = new Schema<IPresale>(
       type: String,
       default: '',
     },
+    logo_url: {
+      type: String,
+      default: '',
+    },
     twitter: {
       type: String,
       default: '',

@@ -9,6 +9,7 @@ export interface IPresale extends Document {
   twitter: string
   discord: string
   telegram: string
+  logo_url: string
   start_time: string
   end_time: string
 }
