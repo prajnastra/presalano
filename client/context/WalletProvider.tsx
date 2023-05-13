@@ -11,7 +11,7 @@ interface Props {
 interface WalletContextType {
   wallet: WalletApi | undefined
   account: string
-  network: Network
+  network: Network | null
   connecting: boolean
   connected: boolean
   connectWallet: () => void
@@ -27,7 +27,10 @@ export const WalletProvider = ({ children }: Props) => {
   const [connecting, setConnecting] = useState<boolean>(false)
   const [connected, setConnected] = useState<boolean>(false)
   const [account, setAccount] = useState<string>('')
-  const [network, setNetwork] = useLocalStorage('NETWORK', Network.Mainnet)
+  const [network, setNetwork] = useLocalStorage<Network>(
+    'PRESALANO-NETWORK',
+    Network.Mainnet
+  )
 
   const getWalletAddress = async (api: WalletApi): Promise<string> => {
     const lucid = await Lucid.new()
@@ -36,7 +39,9 @@ export const WalletProvider = ({ children }: Props) => {
   }
 
   const changeNetwork = (net: Network) => {
-    setNetwork(net)
+    if (typeof setNetwork === 'function') {
+      setNetwork(net)
+    }
   }
 
   const connectWallet = async () => {

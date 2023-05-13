@@ -107,11 +107,13 @@ export default function Navbar() {
             <Flex alignItems={'center'}>
               <Stack direction={'row'} spacing={2}>
                 <Select
-                  value={network}
+                  value={network || Network.Mainnet}
                   maxW="120px"
+                  rounded={'full'}
                   onChange={(e) => changeNetwork(e.target.value as Network)}
                 >
                   <option value={Network.Mainnet}>Mainnet</option>
+                  <>{console.log(network)}</>
                   <option value={Network.Preprod}>Preprod</option>
                   <option value={Network.Preview}>Preview</option>
                 </Select>
@@ -129,7 +131,6 @@ export default function Navbar() {
                   <Button
                     rounded={'full'}
                     colorScheme={'messenger'}
-                    fontWeight={'normal'}
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}

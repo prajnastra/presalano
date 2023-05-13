@@ -1,38 +1,42 @@
-import { useState, useEffect, Dispatch } from 'react'
-
-const PREFIX = 'PRESALANO-'
+import { useCallback, useEffect, useState } from 'react'
 
 const useLocalStorage = <T>(
   key: string,
-  initialValue: string | number | Function
-): [T, Dispatch<T>] => {
-  const prefixedKey = PREFIX + key
-
-  const [value, setValue] = useState(() => {
-    if (typeof window === 'undefined') {
-      if (typeof initialValue === 'function') {
-        return initialValue()
-      } else {
-        return initialValue
+  initialValue: Function | string | number
+) => {
+  const initialize = (key: string) => {
+    try {
+      const item = localStorage.getItem(key)
+      if (item && item !== 'undefined') {
+        return JSON.parse(item)
       }
-    }
 
-    const jsonValue = localStorage.getItem(prefixedKey)
-
-    if (jsonValue != null) return JSON.parse(jsonValue)
-
-    if (typeof initialValue === 'function') {
-      return initialValue()
-    } else {
+      localStorage.setItem(key, JSON.stringify(initialValue))
+      return initialValue
+    } catch {
       return initialValue
     }
-  })
+  }
+
+  const [state, setState] = useState<T | null>(null)
 
   useEffect(() => {
-    localStorage.setItem(prefixedKey, JSON.stringify(value))
-  }, [prefixedKey, value])
+    setState(initialize(key))
+  }, [])
 
-  return [value, setValue]
+  const setValue = useCallback(
+    (value: T) => {
+      try {
+        setState(value)
+        localStorage.setItem(key, JSON.stringify(value))
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [key, setState]
+  )
+
+  return [state, setValue]
 }
 
 export default useLocalStorage
