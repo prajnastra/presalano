@@ -48,58 +48,69 @@ export default function Minter() {
         >
           <Stack spacing={4} w={'full'} maxW={'md'}>
             <Heading fontSize={'2xl'}>Mint tokens with presalano</Heading>
-            <FormControl
-              id="token-name-input"
-              isInvalid={errors.name ? true : false}
+
+            <Box
+              borderWidth="1px"
+              rounded="lg"
+              maxWidth={800}
+              p={6}
+              m="10px auto"
             >
-              <FormLabel>Token Name</FormLabel>
-
-              <Input
-                type="text"
-                rounded={'full'}
-                isDisabled={!connected || isSubmitting}
-                {...register('name', { required: 'Name is required' })}
-              />
-
-              <FormErrorMessage>
-                {errors.name && errors.name.message}
-              </FormErrorMessage>
-            </FormControl>
-
-            <FormControl
-              id="token-supply-input"
-              isInvalid={errors.total_supply ? true : false}
-            >
-              <FormLabel>Total Supply</FormLabel>
-              <Input
-                type="number"
-                rounded={'full'}
-                isDisabled={!connected || isSubmitting}
-                {...register('total_supply', {
-                  required: 'Total supply is required',
-                })}
-              />
-
-              <FormErrorMessage>
-                {errors.total_supply && errors.total_supply.message}
-              </FormErrorMessage>
-            </FormControl>
-
-            <Stack spacing={6} pt={3}>
-              <Button
-                rounded={'full'}
-                bg={'messenger.500'}
-                color="white"
-                _hover={{ bg: 'messenger.600' }}
-                variant={'solid'}
-                size="lg"
-                type="submit"
-                isLoading={isSubmitting}
-                isDisabled={!connected}
+              <FormControl
+                id="token-name-input"
+                mt="4%"
+                isInvalid={errors.name ? true : false}
               >
-                Mint
-              </Button>
-            </Stack>
+                <FormLabel>Token Name</FormLabel>
+
+                <Input
+                  type="text"
+                  rounded={'full'}
+                  isDisabled={!connected || isSubmitting}
+                  {...register('name', { required: 'Name is required' })}
+                />
+
+                <FormErrorMessage>
+                  {errors.name && errors.name.message}
+                </FormErrorMessage>
+              </FormControl>
+
+              <FormControl
+                id="token-supply-input"
+                mt="4%"
+                isInvalid={errors.total_supply ? true : false}
+              >
+                <FormLabel>Total Supply</FormLabel>
+                <Input
+                  type="number"
+                  rounded={'full'}
+                  isDisabled={!connected || isSubmitting}
+                  {...register('total_supply', {
+                    required: 'Total supply is required',
+                  })}
+                />
+
+                <FormErrorMessage>
+                  {errors.total_supply && errors.total_supply.message}
+                </FormErrorMessage>
+              </FormControl>
+
+              <Stack spacing={6} pt={3} mt="4%">
+                <Button
+                  rounded={'full'}
+                  bg={'messenger.500'}
+                  color="white"
+                  _hover={{ bg: 'messenger.600' }}
+                  variant={'solid'}
+                  size="lg"
+                  type="submit"
+                  isLoading={isSubmitting}
+                  isDisabled={!connected}
+                >
+                  Mint
+                </Button>
+              </Stack>
+            </Box>
           </Stack>
         </Flex>
 

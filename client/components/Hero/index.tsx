@@ -52,7 +52,10 @@ export default function Hero() {
 
             <br />
 
-            <Text as={'span'} color={'messenger.400'}>
+            <Text
+              as={'span'}
+              color={useColorModeValue('messenger.500', 'messenger.200')}
+            >
               welcomes you!
             </Text>
           </Heading>
@@ -71,9 +74,6 @@ export default function Hero() {
               fontWeight={'normal'}
               px={6}
               colorScheme={'messenger'}
-              bg={'messenger.500'}
-              color="white"
-              _hover={{ bg: 'messenger.600' }}
               rightIcon={<ImArrowUpRight2 />}
             >
               Sale token

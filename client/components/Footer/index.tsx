@@ -81,8 +81,7 @@ export default function Footer() {
                 }}
               />
               <IconButton
-                bg={'messenger.500'}
-                color={'white'}
+                colorScheme={'messenger'}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />

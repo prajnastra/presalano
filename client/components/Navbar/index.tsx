@@ -107,10 +107,8 @@ export default function Navbar() {
                 ) : (
                   <Button
                     rounded={'full'}
-                    bg={'messenger.500'}
-                    color={'white'}
+                    colorScheme={'messenger'}
                     fontWeight={'normal'}
-                    _hover={{ bg: 'messenger.600' }}
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}
