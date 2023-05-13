@@ -98,9 +98,7 @@ export default function Minter() {
               <Stack spacing={6} pt={3} mt="4%">
                 <Button
                   rounded={'full'}
-                  bg={'messenger.500'}
-                  color="white"
-                  _hover={{ bg: 'messenger.600' }}
+                  colorScheme="messenger"
                   variant={'solid'}
                   size="lg"
                   type="submit"

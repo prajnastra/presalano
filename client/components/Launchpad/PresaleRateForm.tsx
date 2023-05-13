@@ -1,5 +1,4 @@
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-
 import {
   Heading,
   FormControl,
@@ -54,75 +53,76 @@ export default function PresaleRateForm({
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl mt="3%" isInvalid={errors.min_buy ? true : false}>
-        <FormLabel htmlFor="min-ada-input" fontWeight={'normal'}>
-          Min Buy (Ada)
-        </FormLabel>
-        <Input
-          id="min-ada-input"
-          type="number"
-          rounded={'full'}
-          placeholder="0"
-          isDisabled={!connected || isDisabled}
-          {...register('min_buy', { required: 'Min buy is required' })}
-        />
-        <FormErrorMessage>
-          {errors.min_buy && errors.min_buy.message}
-        </FormErrorMessage>
-      </FormControl>
-
-      <FormControl mt="3%" isInvalid={errors.max_buy ? true : false}>
-        <FormLabel htmlFor="max-buy-input" fontWeight={'normal'}>
-          Max Buy (Ada)
-        </FormLabel>
-        <Input
-          id="max-buy-input"
-          type="number"
-          rounded={'full'}
-          placeholder="0"
-          isDisabled={!connected || isDisabled}
-          {...register('max_buy', { required: 'Max buy is required' })}
-        />
-        <FormErrorMessage>
-          {errors.max_buy && errors.max_buy.message}
-        </FormErrorMessage>
-      </FormControl>
-
       <Flex mt="3%">
-        <FormControl mr="5%" isInvalid={errors.start_time ? true : false}>
-          <FormLabel htmlFor="start-time-input" fontWeight={'normal'}>
-            Start Time
+        <FormControl mr="5%" isInvalid={errors.min_buy ? true : false}>
+          <FormLabel htmlFor="min-ada-input" fontWeight={'normal'}>
+            Min Buy (Ada)
           </FormLabel>
           <Input
-            id="start-time-input"
+            id="min-ada-input"
             type="number"
             rounded={'full'}
             placeholder="0"
             isDisabled={!connected || isDisabled}
-            {...register('start_time', { required: 'Start time is required' })}
+            {...register('min_buy', { required: 'Min buy is required' })}
           />
           <FormErrorMessage>
-            {errors.start_time && errors.start_time.message}
+            {errors.min_buy && errors.min_buy.message}
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={errors.end_time ? true : false}>
-          <FormLabel htmlFor="end-time-input" fontWeight={'normal'}>
-            End Time
+        <FormControl isInvalid={errors.max_buy ? true : false}>
+          <FormLabel htmlFor="max-buy-input" fontWeight={'normal'}>
+            Max Buy (Ada)
           </FormLabel>
           <Input
-            id="end-time-input"
+            id="max-buy-input"
             type="number"
             rounded={'full'}
             placeholder="0"
             isDisabled={!connected || isDisabled}
-            {...register('end_time', { required: 'End time is required' })}
+            {...register('max_buy', { required: 'Max buy is required' })}
           />
           <FormErrorMessage>
-            {errors.end_time && errors.end_time.message}
+            {errors.max_buy && errors.max_buy.message}
           </FormErrorMessage>
         </FormControl>
       </Flex>
+
+      <FormControl mt="3%" isInvalid={errors.start_time ? true : false}>
+        <FormLabel htmlFor="start-time-input" fontWeight={'normal'}>
+          Start Time
+        </FormLabel>
+        <Input
+          id="start-time-input"
+          type="datetime-local"
+          rounded={'full'}
+          placeholder="0"
+          isDisabled={!connected || isDisabled}
+          {...register('start_time', { required: 'Start time is required' })}
+        />
+
+        <FormErrorMessage>
+          {errors.start_time && errors.start_time.message}
+        </FormErrorMessage>
+      </FormControl>
+
+      <FormControl mt="3%" isInvalid={errors.end_time ? true : false}>
+        <FormLabel htmlFor="end-time-input" fontWeight={'normal'}>
+          End Time
+        </FormLabel>
+        <Input
+          id="end-time-input"
+          type="datetime-local"
+          rounded={'full'}
+          placeholder="0"
+          isDisabled={!connected || isDisabled}
+          {...register('end_time', { required: 'End time is required' })}
+        />
+        <FormErrorMessage>
+          {errors.end_time && errors.end_time.message}
+        </FormErrorMessage>
+      </FormControl>
     </>
   )
 }
