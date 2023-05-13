@@ -16,7 +16,7 @@ export interface LauncpadInputs {
 }
 
 export enum Network {
-  Mainnet = 'mainnet',
-  Preprod = 'preprod',
-  Preview = 'preview',
+  Mainnet = 'Mainnet',
+  Preprod = 'Preprod',
+  Preview = 'Preview',
 }

@@ -1,5 +1,7 @@
+import { useRouter } from 'next/router'
 import { useForm, SubmitHandler } from 'react-hook-form'
-// import swal from 'sweetalert'
+import { Lucid, Blockfrost, fromText } from 'lucid-cardano'
+import swal from 'sweetalert'
 
 import {
   Box,
@@ -25,7 +27,8 @@ interface Inputs {
 }
 
 export default function Minter() {
-  const { connected, network } = useWallet()
+  const router = useRouter()
+  const { connected, network, wallet } = useWallet()
   const {
     register,
     handleSubmit,
@@ -33,10 +36,65 @@ export default function Minter() {
   } = useForm<Inputs>()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    if (!network) return
+    if (!network || !wallet) return
     const info = getBlockForestInfo(network)
-    console.log(info)
-    console.log(data)
+
+    const lucid = await Lucid.new(new Blockfrost(info.api, info.key), network)
+
+    lucid.selectWallet(wallet)
+
+    const { paymentCredential } = lucid.utils.getAddressDetails(
+      await lucid.wallet.address()
+    )
+
+    const mintingPolicy = lucid.utils.nativeScriptFromJson({
+      type: 'all',
+      scripts: [
+        { type: 'sig', keyHash: paymentCredential!.hash },
+        {
+          type: 'before',
+          slot: lucid.utils.unixTimeToSlot(Date.now() + 1000000),
+        },
+      ],
+    })
+
+    const policyId = lucid.utils.mintingPolicyToId(mintingPolicy)
+    const unit = policyId + fromText(data.name)
+
+    const tx = await lucid
+      .newTx()
+      .mintAssets({ [unit]: BigInt(data.total_supply) })
+      .validTo(Date.now() + 200000)
+      .attachMintingPolicy(mintingPolicy)
+      .complete()
+
+    const signedTx = await tx.sign().complete()
+
+    const txHash = await signedTx.submit()
+
+    console.log(txHash)
+    swal(
+      'Congratulations!',
+      `${data.total_supply} ${data.name} minted...`,
+      'success',
+      {
+        buttons: {
+          catch: {
+            text: 'View Tx',
+            value: 'view',
+          },
+          close: true,
+        },
+      }
+    ).then((value) => {
+      switch (value) {
+        case 'view':
+          router.push(`${info.explorer}/transaction/${txHash}`)
+          break
+        default:
+          return
+      }
+    })
   }
 
   return (
