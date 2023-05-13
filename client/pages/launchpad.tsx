@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+// import swal from 'sweetalert'
 import {
   Box,
   Flex,
@@ -18,12 +20,24 @@ import {
 } from '../components/Launchpad'
 
 import { useWallet } from '../context'
+import { LauncpadInputs } from '../types'
 
 export default function Launchpad() {
   const { connected } = useWallet()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LauncpadInputs>()
+
   const toast = useToast()
   const [step, setStep] = useState(1)
   const [progress, setProgress] = useState(33.33)
+
+  const onSubmit: SubmitHandler<LauncpadInputs> = async (data) => {
+    console.log(data)
+  }
+
   return (
     <>
       <Base title="Presalano: Launchpad">
@@ -38,8 +52,9 @@ export default function Launchpad() {
                 maxWidth={800}
                 p={6}
                 m="10px auto"
-                minH={'500px'}
+                minH={'550px'}
                 as="form"
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <Progress
                   value={progress}
@@ -50,11 +65,23 @@ export default function Launchpad() {
                   isAnimated
                 ></Progress>
                 {step === 1 ? (
-                  <TokenInfoForm />
+                  <TokenInfoForm
+                    register={register}
+                    errors={errors}
+                    isDisabled={false}
+                  />
                 ) : step === 2 ? (
-                  <PresaleRateForm />
+                  <PresaleRateForm
+                    register={register}
+                    errors={errors}
+                    isDisabled={false}
+                  />
                 ) : (
-                  <SocialForm />
+                  <SocialForm
+                    register={register}
+                    errors={errors}
+                    isDisabled={false}
+                  />
                 )}
                 <ButtonGroup mt="5%" w="100%">
                   <Flex w="100%" justifyContent="space-between">
@@ -98,15 +125,7 @@ export default function Launchpad() {
                         variant="solid"
                         isDisabled={!connected}
                         rounded={'full'}
-                        onClick={() => {
-                          toast({
-                            title: 'Account created.',
-                            description: "We've created your account for you.",
-                            status: 'success',
-                            duration: 3000,
-                            isClosable: true,
-                          })
-                        }}
+                        type="submit"
                       >
                         Submit
                       </Button>

@@ -1,15 +1,26 @@
+import { UseFormRegister, FieldErrors } from 'react-hook-form'
+
 import {
   Heading,
   Flex,
   FormControl,
   FormLabel,
   Input,
+  Textarea,
   FormHelperText,
+  FormErrorMessage,
 } from '@chakra-ui/react'
 
 import { useWallet } from '../../context'
+import { LauncpadInputs } from '../../types'
 
-export default function TokenInfoForm() {
+interface Props {
+  register: UseFormRegister<LauncpadInputs>
+  errors: FieldErrors<LauncpadInputs>
+  isDisabled: boolean
+}
+
+export default function TokenInfoForm({ register, errors, isDisabled }: Props) {
   const { connected } = useWallet()
 
   return (
@@ -25,7 +36,7 @@ export default function TokenInfoForm() {
       </Heading>
 
       <Flex>
-        <FormControl mr="5%">
+        <FormControl mr="5%" isInvalid={errors.token_name ? true : false}>
           <FormLabel htmlFor="token-name-input" fontWeight={'normal'}>
             Token Name
           </FormLabel>
@@ -34,11 +45,15 @@ export default function TokenInfoForm() {
             placeholder="Token name"
             type="text"
             rounded={'full'}
-            isDisabled={!connected}
+            isDisabled={!connected || isDisabled}
+            {...register('token_name', { required: 'Token name is required' })}
           />
+          <FormErrorMessage>
+            {errors.token_name && errors.token_name.message}
+          </FormErrorMessage>
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={errors.total_supply ? true : false}>
           <FormLabel htmlFor="total-supply-input" fontWeight={'normal'}>
             Total Supply
           </FormLabel>
@@ -47,12 +62,16 @@ export default function TokenInfoForm() {
             placeholder="0"
             type="number"
             rounded={'full'}
-            isDisabled={!connected}
+            isDisabled={!connected || isDisabled}
+            {...register('total_supply', { required: 'Supply is required' })}
           />
+          <FormErrorMessage>
+            {errors.total_supply && errors.total_supply.message}
+          </FormErrorMessage>
         </FormControl>
       </Flex>
 
-      <FormControl mt="2%">
+      <FormControl mt="3%" isInvalid={errors.token_name ? true : false}>
         <FormLabel htmlFor="policy-id-input" fontWeight={'normal'}>
           Policy Id
         </FormLabel>
@@ -61,25 +80,29 @@ export default function TokenInfoForm() {
           type="text"
           rounded={'full'}
           placeholder="d343aa89662da4d1367268a573660b57ef6c62ff235f51d035f43531"
-          isDisabled={!connected}
+          isDisabled={!connected || isDisabled}
+          {...register('policy_id', { required: 'Policy id is required' })}
         />
         <FormHelperText>Put your native token policy id</FormHelperText>
+        <FormErrorMessage>
+          {errors.policy_id && errors.policy_id.message}
+        </FormErrorMessage>
       </FormControl>
 
-      <FormControl mt="2%">
-        <FormLabel htmlFor="logo-url-input" fontWeight={'normal'}>
-          Logo URL
+      <FormControl mt="3%" isInvalid={errors.description ? true : false}>
+        <FormLabel htmlFor="description-input" fontWeight={'normal'}>
+          Policy Id
         </FormLabel>
-        <Input
-          id="logo-url-input"
-          type="text"
-          placeholder="https://example.com/logo.svg"
-          isDisabled={!connected}
-          rounded={'full'}
+        <Textarea
+          id="policy-id-input"
+          rounded={'lg'}
+          placeholder="..."
+          isDisabled={!connected || isDisabled}
+          {...register('description', { required: 'Description is required' })}
         />
-        <FormHelperText>
-          URL must end with a supported image extension png, jpg, jpeg or gif
-        </FormHelperText>
+        <FormErrorMessage>
+          {errors.description && errors.description.message}
+        </FormErrorMessage>
       </FormControl>
     </>
   )
