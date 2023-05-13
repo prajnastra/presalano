@@ -91,7 +91,7 @@ export default function TokenInfoForm({ register, errors, isDisabled }: Props) {
 
       <FormControl mt="3%" isInvalid={errors.description ? true : false}>
         <FormLabel htmlFor="description-input" fontWeight={'normal'}>
-          Policy Id
+          Description
         </FormLabel>
         <Textarea
           id="policy-id-input"
