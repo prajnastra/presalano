@@ -24,7 +24,7 @@ interface Inputs {
 }
 
 export default function Minter() {
-  const { connected } = useWallet()
+  const { connected, network } = useWallet()
   const {
     register,
     handleSubmit,

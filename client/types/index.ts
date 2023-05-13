@@ -14,3 +14,9 @@ export interface LauncpadInputs {
   start_time: string
   end_time: string
 }
+
+export enum Network {
+  Mainnet = 'mainnet',
+  Preprod = 'preprod',
+  Preview = 'preview',
+}

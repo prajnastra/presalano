@@ -6,6 +6,7 @@ import {
   Heading,
   IconButton,
   Button,
+  Select,
   useDisclosure,
   useColorModeValue,
   useColorMode,
@@ -16,11 +17,19 @@ import { FaWallet } from 'react-icons/fa'
 
 import ChakraNextLink from '../ChakraNextLink'
 import { useWallet } from '../../context'
+import { Network } from '../../types'
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { connecting, connectWallet, connected, account } = useWallet()
+  const {
+    connecting,
+    connectWallet,
+    connected,
+    account,
+    network,
+    changeNetwork,
+  } = useWallet()
 
   const hoverColor = useColorModeValue('gray.200', 'gray.700')
 
@@ -94,11 +103,23 @@ export default function Navbar() {
                 ))}
               </HStack>
             </HStack>
+
             <Flex alignItems={'center'}>
-              <Stack direction={'row'} spacing={7}>
+              <Stack direction={'row'} spacing={2}>
+                <Select
+                  value={network}
+                  maxW="120px"
+                  onChange={(e) => changeNetwork(e.target.value as Network)}
+                >
+                  <option value={Network.Mainnet}>Mainnet</option>
+                  <option value={Network.Preprod}>Preprod</option>
+                  <option value={Network.Preview}>Preview</option>
+                </Select>
+
                 <Button onClick={toggleColorMode} variant="ghost">
                   {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                 </Button>
+
                 {connected ? (
                   <Button rounded={'full'} isDisabled={true}>{`${account.slice(
                     0,

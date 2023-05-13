@@ -1,6 +1,9 @@
 import { useState, useContext, createContext, ReactNode } from 'react'
 import { WalletApi, Lucid } from 'lucid-cardano'
 
+import { useLocalStorage } from '../hooks'
+import { Network } from '../types'
+
 interface Props {
   children: ReactNode
 }
@@ -8,9 +11,11 @@ interface Props {
 interface WalletContextType {
   wallet: WalletApi | undefined
   account: string
+  network: Network
   connecting: boolean
   connected: boolean
   connectWallet: () => void
+  changeNetwork: (network: Network) => void
 }
 
 const WalletContext = createContext<WalletContextType>(null!)
@@ -22,11 +27,16 @@ export const WalletProvider = ({ children }: Props) => {
   const [connecting, setConnecting] = useState<boolean>(false)
   const [connected, setConnected] = useState<boolean>(false)
   const [account, setAccount] = useState<string>('')
+  const [network, setNetwork] = useLocalStorage('NETWORK', Network.Mainnet)
 
   const getWalletAddress = async (api: WalletApi): Promise<string> => {
     const lucid = await Lucid.new()
     lucid.selectWallet(api)
     return await lucid.wallet.address()
+  }
+
+  const changeNetwork = (net: Network) => {
+    setNetwork(net)
   }
 
   const connectWallet = async () => {
@@ -47,7 +57,15 @@ export const WalletProvider = ({ children }: Props) => {
 
   return (
     <WalletContext.Provider
-      value={{ wallet, account, connecting, connectWallet, connected }}
+      value={{
+        wallet,
+        account,
+        connecting,
+        connectWallet,
+        connected,
+        network,
+        changeNetwork,
+      }}
     >
       {children}
     </WalletContext.Provider>
