@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { FaDiscord, FaTelegram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaDiscord, FaTelegram, FaTwitter } from 'react-icons/fa'
 import { BiMailSend } from 'react-icons/bi'
 
 import ListHeader from './ListHeader'
