@@ -2,8 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BLOCKFOREST_KEY: process.env.BLOCKFOREST_KEY,
-    NFTSTORAGE_KEY: process.env.NFTSTORAGE_KEY,
+    MAINNET_BLOCKFOREST_KEY: process.env.MAINNET_BLOCKFOREST_KEY,
+    PREPROD_BLOCKFOREST_KEY: process.env.PREPROD_BLOCKFOREST_KEY,
+    PREVIEW_BLOCKFOREST_KEY: process.env.PREVIEW_BLOCKFOREST_KEY,
   },
   webpack: function (config, options) {
     config.experiments = {

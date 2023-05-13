@@ -17,6 +17,7 @@ import {
 import Base from '../../components/Base'
 
 import { useWallet } from '../../context'
+import { getBlockForestInfo } from '../../utils'
 
 interface Inputs {
   name: string
@@ -32,6 +33,10 @@ export default function Minter() {
   } = useForm<Inputs>()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    if (!network) return
+    console.log(network)
+    const info = getBlockForestInfo(network)
+    console.log(info)
     console.log(data)
   }
 
