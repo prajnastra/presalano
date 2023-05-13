@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 
 const useLocalStorage = <T>(
   key: string,
-  initialValue: Function | string | number
-) => {
-  const initialize = (key: string) => {
+  initialValue: T
+): [T | null, (value: T) => void] => {
+  const initialize = (key: string): T => {
     try {
       const item = localStorage.getItem(key)
       if (item && item !== 'undefined') {
@@ -30,6 +30,7 @@ const useLocalStorage = <T>(
         setState(value)
         localStorage.setItem(key, JSON.stringify(value))
       } catch (error) {
+        setState(initialValue)
         console.log(error)
       }
     },

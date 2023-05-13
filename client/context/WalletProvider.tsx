@@ -39,9 +39,7 @@ export const WalletProvider = ({ children }: Props) => {
   }
 
   const changeNetwork = (net: Network) => {
-    if (typeof setNetwork === 'function') {
-      setNetwork(net)
-    }
+    setNetwork(net)
   }
 
   const connectWallet = async () => {
