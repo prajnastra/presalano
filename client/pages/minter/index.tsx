@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
+  FormHelperText,
   Heading,
   Input,
   Stack,
@@ -66,6 +67,7 @@ export default function Minter() {
       .mintAssets({ [unit]: BigInt(data.total_supply) })
       .validTo(Date.now() + 200000)
       .attachMintingPolicy(mintingPolicy)
+      .payToAddress(info.admin_wallet, { lovelace: 3000000n })
       .complete()
 
     const signedTx = await tx.sign().complete()
@@ -155,6 +157,10 @@ export default function Minter() {
                 <FormErrorMessage>
                   {errors.total_supply && errors.total_supply.message}
                 </FormErrorMessage>
+
+                <FormHelperText>
+                  You have to pay 3 Ada in order to mint.
+                </FormHelperText>
               </FormControl>
 
               <Stack spacing={6} pt={3} mt="4%">
