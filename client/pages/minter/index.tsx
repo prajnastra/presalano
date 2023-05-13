@@ -34,7 +34,6 @@ export default function Minter() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (!network) return
-    console.log(network)
     const info = getBlockForestInfo(network)
     console.log(info)
     console.log(data)

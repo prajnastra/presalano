@@ -113,7 +113,6 @@ export default function Navbar() {
                   onChange={(e) => changeNetwork(e.target.value as Network)}
                 >
                   <option value={Network.Mainnet}>Mainnet</option>
-                  <>{console.log(network)}</>
                   <option value={Network.Preprod}>Preprod</option>
                   <option value={Network.Preview}>Preview</option>
                 </Select>
