@@ -22,6 +22,7 @@ import {
 import { FaDiscord, FaTelegram, FaTwitter, FaLink } from 'react-icons/fa'
 
 import SocialButton from '../../components/Footer/SocialButton'
+import Loader from '../../components/Loader'
 import Base from '../../components/Base'
 
 import { useWallet } from '../../context'
@@ -33,6 +34,7 @@ export default function SaleInfo() {
 
   return (
     <Base title="Presalano: Sale Info">
+      <Loader minH={'200px'} />
       <Grid templateColumns={['repeat(1, 1fr)', '1fr 1fr']} gap="1rem" mb={10}>
         <Box
           border={'1px'}

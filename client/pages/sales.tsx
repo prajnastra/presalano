@@ -1,12 +1,14 @@
 import { SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 
 import Base from '../components/Base'
+import Loader from '../components/Loader'
 import { SaleCard } from '../components/Card'
 
 export default function Sales() {
   return (
     <>
       <Base title="Presalano: Ongoing sales">
+        <Loader minH={'200px'} />
         <SimpleGrid
           columns={{ base: 1, md: 3, lg: 4 }}
           gap="1rem"
