@@ -1,4 +1,8 @@
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import moment from 'moment'
+import useSWR from 'swr'
+import useSWRMutation from 'swr/mutation'
 
 import {
   Box,
@@ -8,9 +12,7 @@ import {
   Image,
   Heading,
   Text,
-  List,
   ListItem,
-  ListIcon,
   Flex,
   UnorderedList,
   Input,
@@ -18,6 +20,7 @@ import {
   FormControl,
   FormErrorMessage,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react'
 import { FaDiscord, FaTelegram, FaTwitter, FaLink } from 'react-icons/fa'
 
@@ -26,15 +29,42 @@ import Loader from '../../components/Loader'
 import Base from '../../components/Base'
 
 import { useWallet } from '../../context'
+import { getASaleInfoAPI, updateSaleAPI } from '../../api'
+import { sliceString } from '../../utils'
+import CopyButton from '../../components/CopyButton'
 
 export default function SaleInfo() {
   const router = useRouter()
   const { id } = router.query
-  const { connected } = useWallet()
+  const toast = useToast()
+  const { connected, account } = useWallet()
+  const {
+    trigger,
+    isMutating,
+    data: updateRes,
+  } = useSWRMutation(`/api/sale/${id}`, updateSaleAPI)
+  const { data, error, isLoading } = useSWR(`/api/sale/${id}`, (url) =>
+    getASaleInfoAPI(url)
+  )
+
+  useEffect(() => {
+    console.log(error?.message)
+  }, [error])
+
+  useEffect(() => {
+    if (updateRes) {
+      toast({
+        title: `Sale is finalized...`,
+        position: 'top-right',
+        isClosable: true,
+      })
+    }
+  }, [updateRes])
 
   return (
     <Base title="Presalano: Sale Info">
-      <Loader minH={'200px'} />
+      {isLoading && <Loader minH={'250px'} />}
+
       <Grid templateColumns={['repeat(1, 1fr)', '1fr 1fr']} gap="1rem" mb={10}>
         <Box
           border={'1px'}
@@ -56,31 +86,31 @@ export default function SaleInfo() {
             <Flex justify={'space-between'} flexDir={'column'}>
               <Flex justify={'space-between'} align={'center'}>
                 <Heading as="h3" size="lg">
-                  Test
+                  {data?.token_name}
                 </Heading>
                 <Badge
                   ml="1"
                   fontSize={'1rem'}
-                  colorScheme={true ? 'red' : 'green'}
+                  colorScheme={data?.is_close ? 'red' : 'green'}
                 >
-                  {true ? 'Closed' : 'Ongoing'}
+                  {data?.is_close ? 'Closed' : 'Ongoing'}
                 </Badge>
               </Flex>
 
               <Stack direction={'row'} spacing={3}>
-                <SocialButton label={'Website'} href={'#'}>
+                <SocialButton label={'Website'} href={data?.website || '#'}>
                   <FaLink />
                 </SocialButton>
 
-                <SocialButton label={'Twitter'} href={'#'}>
+                <SocialButton label={'Twitter'} href={data?.twitter || '#'}>
                   <FaTwitter />
                 </SocialButton>
 
-                <SocialButton label={'Discord'} href={'#'}>
+                <SocialButton label={'Discord'} href={data?.discord || '#'}>
                   <FaDiscord />
                 </SocialButton>
 
-                <SocialButton label={'Telegram'} href={'#'}>
+                <SocialButton label={'Telegram'} href={data?.telegram || '#'}>
                   <FaTelegram />
                 </SocialButton>
               </Stack>
@@ -88,39 +118,31 @@ export default function SaleInfo() {
           </Flex>
 
           <Text fontSize="md" mt="5%">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-            soluta.
-            {/*data?.data.description && sliceString(data?.data.description)*/}
+            {data?.description && sliceString(data.description)}
           </Text>
 
           <UnorderedList spacing={1} mt="5%">
             <ListItem>
-              Owner: {/*data?.data.owner && sliceString(data.data.owner)*/}
-              {/*data?.data.owner && <CopyButton data={data.data.owner} />*/}
+              Owner: {data?.owner && sliceString(data.owner)}
+              {data?.owner && <CopyButton data={data.owner} />}
             </ListItem>
 
-            <ListItem>
-              Token Per Ada: 1000{' '}
-              {/*data?.data.winner && sliceString(data.data.winner)*/}
-              {/*data?.data.winner && <CopyButton data={data.data.winner} />*/}
-            </ListItem>
+            <ListItem>Token Per Ada: {data?.token_per_ada}</ListItem>
 
-            <ListItem>Min Buy: 300 Ada</ListItem>
+            <ListItem>Min Buy: {data?.min_buy} Ada</ListItem>
 
-            <ListItem>Max Buy: 1000 Ada</ListItem>
+            <ListItem>Max Buy: {data?.max_buy} Ada</ListItem>
 
             <ListItem>
               Start Date:{' '}
-              {/*data?.data.start_time &&
-                  moment(data.data.start_time).format(
-                    'MMMM Do YYYY, h:mm:ss a'
-                  )*/}
+              {data?.start_time &&
+                moment(data.start_time).format('MMMM Do YYYY, h:mm:ss a')}
             </ListItem>
 
             <ListItem>
               End Date:{' '}
-              {/*data?.data.end_time &&
-                  moment(data.data.end_time).format('MMMM Do YYYY, h:mm:ss a')*/}
+              {data?.end_time &&
+                moment(data.end_time).format('MMMM Do YYYY, h:mm:ss a')}
             </ListItem>
           </UnorderedList>
         </Box>
@@ -130,37 +152,59 @@ export default function SaleInfo() {
           border={'1px'}
           borderColor={useColorModeValue('gray.300', 'gray.700')}
           p={6}
+          pos="relative"
         >
-          <Heading fontSize={'2xl'}>Contribute</Heading>
-          <Stack
-            direction={['column', 'row']}
-            w={{ base: '100%', md: '80%' }}
-            as="form"
-            mt="3%"
-          >
-            <FormControl id="nft-bid-amount-input">
-              <Input
-                pr="4.5rem"
-                type="number"
-                placeholder="Enter amount"
-                size="lg"
-                isDisabled={!connected}
-              />
-
-              <FormErrorMessage>
-                {/*errors.bid_amount && errors.bid_amount.message*/}
-              </FormErrorMessage>
-            </FormControl>
-
-            <Button
-              size="lg"
-              type="submit"
-              colorScheme="messenger"
-              isDisabled={!connected}
+          {data?.is_close && (
+            <Box
+              pos={'absolute'}
+              w="100%"
+              h="100%"
+              bg="blackAlpha.50"
+              backdropFilter={'blur(3px)'}
+              top="0"
+              left="0"
+              zIndex={100}
+              display={'flex'}
+              justifyContent="center"
+              alignItems={'center'}
             >
-              Contribute
-            </Button>
-            {/*data?.data.winner === account ? (
+              <Heading fontSize={'2xl'}>The Sale is Closed</Heading>
+            </Box>
+          )}
+
+          {data?.owner !== account && (
+            <>
+              <Heading fontSize={'2xl'}>Contribute</Heading>
+              <Stack
+                direction={['column', 'row']}
+                w={{ base: '100%', md: '80%' }}
+                as="form"
+                mt="3%"
+              >
+                <FormControl id="nft-bid-amount-input">
+                  <Input
+                    pr="4.5rem"
+                    type="number"
+                    placeholder="Enter amount"
+                    size="lg"
+                    isDisabled={!connected}
+                  />
+
+                  <FormErrorMessage>
+                    {/*errors.bid_amount && errors.bid_amount.message*/}
+                  </FormErrorMessage>
+                </FormControl>
+
+                <Button
+                  size="lg"
+                  type="submit"
+                  colorScheme="messenger"
+                  variant={'outline'}
+                  isDisabled={!connected}
+                >
+                  Contribute
+                </Button>
+                {/*data?.data.winner === account ? (
                       {...register('bid_amount', {
                         required: 'Bid amount is required',
                       })}
@@ -178,15 +222,25 @@ export default function SaleInfo() {
                 <>
                 </>
               )*/}
-          </Stack>
+              </Stack>
+            </>
+          )}
 
-          <Stack mt="8%" gap={3} direction={'row'}>
-            <Button size="lg" colorScheme="red" isDisabled={!connected}>
-              Withdraw
-            </Button>
-            <Button size="lg" colorScheme="green" isDisabled={!connected}>
-              Finalize
-            </Button>
+          <Stack gap={3} direction={'row'}>
+            {data?.owner === account && (
+              <Button
+                size="lg"
+                colorScheme="green"
+                isDisabled={!connected}
+                variant={'outline'}
+                isLoading={isMutating}
+                onClick={() => {
+                  trigger({ is_close: true })
+                }}
+              >
+                Finalize Sale
+              </Button>
+            )}
           </Stack>
         </Box>
       </Grid>

@@ -3,6 +3,7 @@ export interface LauncpadInputs {
   description: string
   total_supply: number
   policy_id: string
+  owner: string
   token_per_ada: number
   min_buy: number
   max_buy: number

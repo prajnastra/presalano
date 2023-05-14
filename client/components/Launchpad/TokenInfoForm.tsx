@@ -103,6 +103,7 @@ export default function TokenInfoForm({ register, errors, isDisabled }: Props) {
         <FormErrorMessage>
           {errors.description && errors.description.message}
         </FormErrorMessage>
+        <FormHelperText>Don't put more than 100 characters.</FormHelperText>
       </FormControl>
     </>
   )

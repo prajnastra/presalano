@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import useSWRMutation from 'swr/mutation'
 import { useForm, SubmitHandler } from 'react-hook-form'
-// import swal from 'sweetalert'
+
 import {
   Box,
   Flex,
@@ -12,6 +13,7 @@ import {
   useToast,
   Progress,
 } from '@chakra-ui/react'
+
 import Base from '../components/Base'
 import {
   SocialForm,
@@ -21,22 +23,50 @@ import {
 
 import { useWallet } from '../context'
 import { LauncpadInputs } from '../types'
+import { addSaleAPI } from '../api'
 
 export default function Launchpad() {
-  const { connected } = useWallet()
+  const { connected, account } = useWallet()
+  const toast = useToast()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LauncpadInputs>()
+    reset,
+  } = useForm<LauncpadInputs>({
+    defaultValues: {
+      owner: account,
+    },
+  })
 
-  const toast = useToast()
+  const {
+    trigger,
+    isMutating,
+    data,
+    reset: resetMut,
+  } = useSWRMutation('/api/sale', addSaleAPI)
+
   const [step, setStep] = useState(1)
   const [progress, setProgress] = useState(33.33)
 
   const onSubmit: SubmitHandler<LauncpadInputs> = async (data) => {
-    console.log(data)
+    // api
+    data.owner = account
+    trigger(data)
+    reset()
   }
+
+  useEffect(() => {
+    if (data) {
+      console.log('Trigger')
+      resetMut()
+      toast({
+        title: `Sale listed.`,
+        position: 'top-right',
+        isClosable: true,
+      })
+    }
+  }, [data])
 
   return (
     <>
@@ -68,19 +98,19 @@ export default function Launchpad() {
                   <TokenInfoForm
                     register={register}
                     errors={errors}
-                    isDisabled={false}
+                    isDisabled={isSubmitting || isMutating}
                   />
                 ) : step === 2 ? (
                   <PresaleRateForm
                     register={register}
                     errors={errors}
-                    isDisabled={false}
+                    isDisabled={isSubmitting || isMutating}
                   />
                 ) : (
                   <SocialForm
                     register={register}
                     errors={errors}
-                    isDisabled={false}
+                    isDisabled={isSubmitting || isMutating}
                   />
                 )}
                 <ButtonGroup mt="5%" w="100%">
@@ -91,7 +121,7 @@ export default function Launchpad() {
                           setStep(step - 1)
                           setProgress(progress - 33.33)
                         }}
-                        isDisabled={step === 1}
+                        isDisabled={step === 1 || isMutating}
                         colorScheme="messenger"
                         rounded={'full'}
                         variant="solid"
@@ -102,7 +132,7 @@ export default function Launchpad() {
                       </Button>
                       <Button
                         w="7rem"
-                        isDisabled={step === 3}
+                        isDisabled={step === 3 || isMutating}
                         rounded={'full'}
                         onClick={() => {
                           setStep(step + 1)
@@ -124,6 +154,7 @@ export default function Launchpad() {
                         colorScheme="green"
                         variant="solid"
                         isDisabled={!connected}
+                        isLoading={isSubmitting || isMutating}
                         rounded={'full'}
                         type="submit"
                       >
