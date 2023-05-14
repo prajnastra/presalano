@@ -18,10 +18,15 @@ const presaleSchema = new Schema<IPresale>(
     },
     owner: {
       type: String,
+      unique: true,
     },
     total_supply: {
       type: Number,
       default: 0,
+    },
+    is_close: {
+      type: Boolean,
+      default: false,
     },
     token_per_ada: {
       type: Number,

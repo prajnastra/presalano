@@ -38,6 +38,20 @@ export const getAPresale = (req: ModRequest, res: Response) => {
   return res.json(req.presale)
 }
 
+export const getAllPresale = (_req: ModRequest, res: Response) => {
+  Presale.find({ is_close: false })
+    .sort({ createdAt: -1 })
+    .limit(30)
+    .exec((err, presales) => {
+      if (err) {
+        return res.status(400).json({
+          error: 'No presales found!',
+        })
+      }
+      res.json(presales)
+    })
+}
+
 export const updatePresale = (req: ModRequest, res: Response) => {
   if (!req.presale) return
 

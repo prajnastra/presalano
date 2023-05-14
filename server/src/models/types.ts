@@ -16,6 +16,7 @@ export interface IPresale extends Document {
   logo_url: string
   start_time: string
   end_time: string
+  is_close: boolean
 }
 
 export interface IMint extends Document {

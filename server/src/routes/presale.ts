@@ -5,14 +5,16 @@ import {
   getAPresale,
   createPresale,
   updatePresale,
+  getAllPresale,
 } from '../controllers/presale'
 
 const router = express.Router()
 
-router.param('presaleId', getPresaleById)
+router.param('saleId', getPresaleById)
 
-router.get('/presale/:presaleId', getAPresale)
-router.post('/presale', createPresale)
-router.put('/user/:presaleId', updatePresale)
+router.get('/sale/:saleId', getAPresale)
+router.get('/sales', getAllPresale)
+router.post('/sale', createPresale)
+router.put('/sale/:saleId', updatePresale)
 
 export default router
