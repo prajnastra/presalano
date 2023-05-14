@@ -34,7 +34,7 @@ export default function SaleCard({ sale }: Props) {
       role={'group'}
       p={6}
       maxW={'330px'}
-      maxH={'300px'}
+      maxH={'290px'}
       w={'full'}
       bg={useColorModeValue('white', 'gray.800')}
       pos="relative"
