@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <Box
       mt={'4rem'}
-      bg={useColorModeValue('white', 'gray.900')}
+      bg={useColorModeValue('white', 'gray.800')}
       color={useColorModeValue('gray.700', 'gray.200')}
       borderTop="1px"
       borderColor={useColorModeValue('gray.300', 'gray.700')}

@@ -74,7 +74,7 @@ export default function SaleInfo() {
         >
           <Flex>
             <Image
-              src={'#'}
+              src={data?.logo_url ? data.logo_url : '#'}
               rounded="md"
               fallbackSrc={'https://via.placeholder.com/300x300?text=Not+Found'}
               alt={'Test'}

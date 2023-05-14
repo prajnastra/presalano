@@ -15,9 +15,11 @@ import {
   Input,
   Stack,
   Image,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
 import Base from '../../components/Base'
+import ChakraNextLink from '../../components/ChakraNextLink'
 
 import { useWallet } from '../../context'
 import { getBlockForestInfo } from '../../utils'
@@ -163,11 +165,11 @@ export default function Minter() {
                 </FormHelperText>
               </FormControl>
 
-              <Stack spacing={6} pt={3} mt="4%">
+              <Stack spacing={2} pt={3} mt="4%" direction={'row'}>
                 <Button
                   rounded={'full'}
                   colorScheme="messenger"
-                  variant={'solid'}
+                  variant={'outline'}
                   size="lg"
                   type="submit"
                   isLoading={isSubmitting}
@@ -175,6 +177,17 @@ export default function Minter() {
                 >
                   Mint
                 </Button>
+
+                <ChakraNextLink href="/launchpad">
+                  <Button
+                    rounded={'full'}
+                    variant={'outline'}
+                    size="lg"
+                    color={useColorModeValue('gray.600', 'gray.500')}
+                  >
+                    Go to launchpad
+                  </Button>
+                </ChakraNextLink>
               </Stack>
             </Box>
           </Stack>

@@ -21,6 +21,7 @@ export default function Sales() {
           gap="1rem"
           bg={useColorModeValue('white', 'gray.800')}
           m="4rem 0"
+          minH={'75vh'}
         >
           {data && data.map((sale) => <SaleCard key={sale._id} sale={sale} />)}
         </SimpleGrid>
