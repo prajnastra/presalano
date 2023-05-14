@@ -82,7 +82,7 @@ export default function Launchpad() {
                 maxWidth={800}
                 p={6}
                 m="10px auto"
-                minH={'550px'}
+                minH={'557px'}
                 as="form"
                 onSubmit={handleSubmit(onSubmit)}
               >
@@ -126,6 +126,7 @@ export default function Launchpad() {
                         rounded={'full'}
                         variant="solid"
                         w="7rem"
+                        size="lg"
                         mr="5%"
                       >
                         Back
@@ -144,6 +145,7 @@ export default function Launchpad() {
                         }}
                         colorScheme="messenger"
                         variant="outline"
+                        size="lg"
                       >
                         Next
                       </Button>
@@ -156,6 +158,7 @@ export default function Launchpad() {
                         isDisabled={!connected}
                         isLoading={isSubmitting || isMutating}
                         rounded={'full'}
+                        size="lg"
                         type="submit"
                       >
                         Submit
