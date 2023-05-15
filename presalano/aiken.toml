@@ -1,0 +1,14 @@
+name = "presalano/presalano"
+version = "0.0.0"
+license = "Apache-2.0"
+description = "Aiken contracts for project 'presalano/presalano'"
+
+[repository]
+user = "presalano"
+project = "presalano"
+platform = "github"
+
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "main"
+source = "github"
