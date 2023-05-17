@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "contracts"
   ],
   "scripts": {
     "format": "yarn prettier --write .",
@@ -16,5 +17,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.1",
     "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "lucid-cardano": "0.10.1"
   }
 }
