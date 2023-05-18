@@ -1,0 +1,405 @@
+{
+  "preamble": {
+    "title": "presalano/presalano",
+    "description": "Aiken contracts for project 'presalano/presalano'",
+    "version": "0.0.0",
+    "plutusVersion": "v2",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "presalano.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/presalano~1types~1TradeDatum"
+        }
+      },
+      "redeemer": {
+        "title": "action",
+        "schema": {
+          "$ref": "#/definitions/presalano~1types~1TradeAction"
+        }
+      },
+      "parameters": [
+        {
+          "title": "protocol_key",
+          "schema": {
+            "$ref": "#/definitions/Option$ByteArray"
+          }
+        },
+        {
+          "title": "presale_token",
+          "schema": {
+            "$ref": "#/definitions/presalano~1types~1PresaleToken"
+          }
+        },
+        {
+          "title": "token_per_lovelace",
+          "schema": {
+            "$ref": "#/definitions/Int"
+          }
+        }
+      ],
+      "compiledCode": "590ee3010000323232323232323232323232322223232323232222323232325333014323232323232533301a3370e9000001899299980d99b87480000044c8c8cc010dd61980c980d804a400846464a66604066e1d2000001132323371e00c0026eb8c0a0004c078008528180f0009980d180e1980d180e000a400090001bae3023001301901614a2603202a2a66603466e1d2002003132323232323232323253330233232337120126466600800291100488100332232533302d00116132533302e00113237566604c6050002900118180010b1818000998019bac3302330250134801094ccc0a0cdd7998121813000a4000006266ebccc090c09800520043374a90021981700125eb805281981098118052400001e6002002444a666056004297ae0132325333028300300213302e0023330050050010031333005005001003302f003302d00213300a37586603e604201e9001119299981299b8700100814a22940ccc008dd5998101811198101811000a400490011bae33020302201e48000dd719810181100f240042940888c8c8c94ccc0a0cdc3a400400229000099190009bad3030001302600230260013253330273370e9001000899ba5480092f5c026464646601200200c0026eacc0bc004c094008c094004cc01800c008c0040048894ccc0a00084cdd2a400497ae013232323253330273371e00a002266e9520003302d375000497ae01333007007003005375c60520066eb4c0a4008c0b000cc0a8008c0040048894ccc0980084cdd2a400497ae013232323253330253371e00a002266e9520003302b374c00497ae01333007007003005375c604e0066eacc09c008c0a800cc0a0008cdc100080a9bad33018301a00148008c088004c0614ccc068cdc3a4000603201220122a6603892012a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e00161533301a3370e9002001899191919191919299981099b87480000044c8c8cc018dd61980f9810807a40200026eb8c0a4004c07c0084c8c8c8c94ccc094cdc3a4000002264944c08c0085281811800998081bac3301f302100f480008c8c94ccc098cdc3a4000002264940c0900084c8c8cdc78030009bae302e0013024002302400133020302233020302233020302200148009200048000dd71814800980f801180f8009980d980e800a40006603460380069000180080091129998120010a501323253330213371e00400629444ccc01401400400cc0a000cdd718130011811000980c299980d19b8748000c064024402454cc0712412a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e001614a06002002444a66604000429404c8c94ccc074c00c008528899980280280080198120019811001180b00399ba548000cc070cc048c05000520004bd7019191919000980f800980a99299980c19b8748000c05c004400454cc06924012a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e001633004375866026602a66026602a010900024000466ebccc050c0580052000002301d00130133253330163370e9001180a80088008a9980c2492a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e001633011301300648008cc040c0480152000149858c0040048894ccc0680084cdd2a400497ae0132325333017300300213374a90001980e80125eb804ccc01401400400cc07800cc070008cc048c94ccc048cdc3a400000226464a666032603800426602a64a66602a66e1d2000001132323232533301e302100213301a300f00349854cc06d241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375a603e002603e004603a00260260042a6602e9212b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301300149854cc059241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301a0013010005153330123370e900100089919299980c980e00109980a99299980a99b87480000044c8c8c8c94ccc078c0840084cc068c03c00ccc068c94ccc068cdc3a400000226464a666042604800426603a6602000246464660406602600246464931bad3025002375c6046002931bab3022002375c6040002930a9980f2481334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e20657870656374656400163756604400260300042a66603466e1d200200113232323232325333025302800213302133014003232498dd70009981099299981099b87480000044c8c94ccc0a0c0ac0084cc090cc05c0048cc094c94ccc094cdc3a400000226464a666058605e0042930a99814a49334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c605a00260460042a66604a66e1d200200113232533302c302f002149854cc0a52401334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c605a00260460042a6604e9212b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e7400163023001499261533025491334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e206578706563746564001637586052002603e0042a66604266e1d200200115333026301f002149854cc08d24011d4578706563746564206e6f206669656c647320666f7220436f6e737472001615330234912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301f00149854cc089241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016302600130260023758604800260480046eb8c088004c06000854cc0712412b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301800149854cc06d241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301f001301f002301d001301300215330174912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301300149854cc059241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301a001301000515330144912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e7400163010004004330113253330113370e90000008a99980b18078018a4c2a6602692011d4578706563746564206e6f206669656c647320666f7220436f6e7374720016153330113370e90010008a99980b18078018a4c2a6602692011d4578706563746564206e6f206669656c647320666f7220436f6e7374720016153330113370e90020008a99980b18078018a4c2a6602692011d4578706563746564206e6f206669656c647320666f7220436f6e737472001615330134912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300f0020023001001222533301300214984cc03cc004c054008ccc00c00cc0580080048c94ccc030cdc3a4000002264646464a66602a6030004266022600e0066602264a66602266e1d2000001132325333018301b0021330143253330143370e900000089919299980d980f00109980b9806800a4c2a660309201334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301c0013012002153330143370e90010008991919191919299980f98110010a4c2a660389201334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375a604000260400046eb4c078004c078008dd6980e00098090010a9980b24812b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301200149854cc055241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e20657870656374656400163019001300f002153330113370e90010008a99980b18078010a4c2a6602692011d4578706563746564206e6f206669656c647320666f7220436f6e737472001615330134912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300f00149854cc049241334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301600130160023014001300a002153300e4912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300a001232533300b3370e9000000899192999809180a8010a4c2a6601e921334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c602600260120042a66601666e1d20020011323253330123015002149854cc03d2401334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c602600260120042a6601a9212b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e7400163009001375a0026600200290001111199980399b8700100300e233330050053370000890011808000801001118039baa001230053754002ae695cdab9c5573aaae7955cfaba05742ae89",
+      "hash": "249348710fd73dd31398ab1c25cd0781829a92b7cbf45142c13aa0a6"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "List$ByteArray": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/ByteArray"
+      }
+    },
+    "List$presalano/types/TraitOption": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/presalano~1types~1TraitOption"
+      }
+    },
+    "Option$ByteArray": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option$List$presalano/types/TraitOption": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/List$presalano~1types~1TraitOption"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option$aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "aiken/dict/Dict$ByteArray_Int": {
+      "title": "Dict",
+      "description": "An opaque `Dict`. The type is opaque because the module maintains some\n invariant, namely: there's only one occurrence of a given key in the dictionary.\n\n Note that the `key` parameter is a phantom-type, and only present as a\n means of documentation. Keys can be any type, yet will need to comparable\n to use functions like `insert`.\n\n See for example:\n\n ```aiken\n pub type Value =\n   Dict<PolicyId, Dict<AssetName, Int>>\n ```",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/ByteArray"
+      },
+      "values": {
+        "$ref": "#/definitions/Int"
+      }
+    },
+    "aiken/transaction/credential/Address": {
+      "title": "Address",
+      "description": "A Cardano `Address` typically holding one or two credential references.\n\n Note that legacy bootstrap addresses (a.k.a. 'Byron addresses') are\n completely excluded from Plutus contexts. Thus, from an on-chain\n perspective only exists addresses of type 00, 01, ..., 07 as detailed\n in [CIP-0019 :: Shelley Addresses](https://github.com/cardano-foundation/CIPs/tree/master/CIP-0019/#shelley-addresses).",
+      "anyOf": [
+        {
+          "title": "Address",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "payment_credential",
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
+            },
+            {
+              "title": "stake_credential",
+              "$ref": "#/definitions/Option$aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/transaction/credential/Credential": {
+      "title": "Credential",
+      "description": "A general structure for representing an on-chain `Credential`.\n\n Credentials are always one of two kinds: a direct public/private key\n pair, or a script (native or Plutus).",
+      "anyOf": [
+        {
+          "title": "VerificationKeyCredential",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "ScriptCredential",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
+      "title": "Referenced",
+      "description": "Represent a type of object that can be represented either inline (by hash)\n or via a reference (i.e. a pointer to an on-chain location).\n\n This is mainly use for capturing pointers to a stake credential\n registration certificate in the case of so-called pointer addresses.",
+      "anyOf": [
+        {
+          "title": "Inline",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "Pointer",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "slot_number",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "transaction_index",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "certificate_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/transaction/value/Value": {
+      "title": "Value",
+      "description": "A multi-asset output `Value`. Contains tokens indexed by [PolicyId](#PolicyId) and [AssetName](#AssetName).\n\n This type maintain some invariants by construction; in particular, a `Value` will never contain a\n zero quantity of a particular token.",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/ByteArray"
+      },
+      "values": {
+        "$ref": "#/definitions/aiken~1dict~1Dict$ByteArray_Int"
+      }
+    },
+    "presalano/types/BidOption": {
+      "title": "BidOption",
+      "anyOf": [
+        {
+          "title": "SpecificValue",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1transaction~1value~1Value"
+            }
+          ]
+        },
+        {
+          "title": "SpecificPolicyIdWithConstraints",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "$ref": "#/definitions/List$ByteArray"
+            },
+            {
+              "$ref": "#/definitions/Option$List$presalano~1types~1TraitOption"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/ContributeDetails": {
+      "title": "ContributeDetails",
+      "anyOf": [
+        {
+          "title": "ContributeDetails",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "owner",
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Address"
+            },
+            {
+              "title": "requested_option",
+              "$ref": "#/definitions/presalano~1types~1BidOption"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/ListingDetails": {
+      "title": "ListingDetails",
+      "anyOf": [
+        {
+          "title": "ListingDetails",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "owner",
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Address"
+            },
+            {
+              "title": "requested_lovelace",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/PresaleToken": {
+      "title": "PresaleToken",
+      "anyOf": [
+        {
+          "title": "PresaleToken",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "policy_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "asset_name",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/TradeAction": {
+      "title": "TradeAction",
+      "anyOf": [
+        {
+          "title": "List",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Contribute",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        },
+        {
+          "title": "Cancel",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": []
+        }
+      ]
+    },
+    "presalano/types/TradeDatum": {
+      "title": "TradeDatum",
+      "anyOf": [
+        {
+          "title": "Listing",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/presalano~1types~1ListingDetails"
+            }
+          ]
+        },
+        {
+          "title": "Contri",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/presalano~1types~1ContributeDetails"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/TraitOption": {
+      "title": "TraitOption",
+      "anyOf": [
+        {
+          "title": "Included",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "Excluded",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

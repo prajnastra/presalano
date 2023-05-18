@@ -39,13 +39,11 @@ pub type ContributeDetails {
 
 pub type TradeDatum {
   Listing(ListingDetails)
-  Contri(ContributeDetails)
 }
 
 pub type TradeAction {
-  List
   Contribute
-  Cancel
+  Finalize
 }
 
 pub type PaymentDatum {
