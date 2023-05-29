@@ -74,14 +74,15 @@ export default function Footer() {
             <Stack direction={'row'}>
               <Input
                 placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                border={0}
+                rounded={'full'}
                 _focus={{
                   bg: 'whiteAlpha.300',
                 }}
               />
               <IconButton
                 colorScheme={'messenger'}
+                variant={'outline'}
+                rounded={'full'}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />

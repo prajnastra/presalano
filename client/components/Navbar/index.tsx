@@ -130,6 +130,7 @@ export default function Navbar() {
                   <Button
                     rounded={'full'}
                     colorScheme={'messenger'}
+                    variant={'outline'}
                     onClick={connectWallet}
                     isLoading={connecting}
                     rightIcon={<FaWallet />}

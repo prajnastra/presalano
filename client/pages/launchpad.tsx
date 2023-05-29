@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import useSWRMutation from 'swr/mutation'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { Lucid, Blockfrost } from 'lucid-cardano'
 
 import {
   Box,
@@ -12,6 +13,7 @@ import {
   ButtonGroup,
   useToast,
   Progress,
+  useDisclosure,
 } from '@chakra-ui/react'
 
 import Base from '../components/Base'
@@ -20,13 +22,16 @@ import {
   TokenInfoForm,
   PresaleRateForm,
 } from '../components/Launchpad'
+import { TransactionModal } from '../components/AlertDialog'
 
 import { useWallet } from '../context'
 import { LauncpadInputs } from '../types'
 import { addSaleAPI } from '../api'
+import { PresaleContract, getBlockForestInfo } from '../utils'
 
 export default function Launchpad() {
-  const { connected, account } = useWallet()
+  const { connected, network, wallet, account } = useWallet()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const {
     register,
@@ -48,29 +53,65 @@ export default function Launchpad() {
 
   const [step, setStep] = useState(1)
   const [progress, setProgress] = useState(33.33)
+  const [apiCallSuccess, setApiCallSuccess] = useState<boolean>(false)
+  const [txUrl, setTxUrl] = useState<string | null>('')
 
+  // api & with blockchain call
   const onSubmit: SubmitHandler<LauncpadInputs> = async (data) => {
-    // api
+    if (!network || !wallet || !account) {
+      toast({
+        title: `Please connect your wallet`,
+        status: 'error',
+        position: 'top-right',
+        isClosable: true,
+      })
+      return
+    }
+
+    const info = getBlockForestInfo(network)
     data.owner = account
-    trigger(data)
-    reset()
+
+    const lucid = await Lucid.new(new Blockfrost(info.api, info.key), network)
+    lucid.selectWallet(wallet)
+
+    const contract = new PresaleContract(lucid, {
+      assetName: data.token_name,
+      policyId: data.policy_id,
+      owner: account,
+      network: network,
+    })
+
+    contract.deployScripts(BigInt(data.total_supply)).then((txHash) => {
+      setTxUrl(info.explorer + '/transaction/' + txHash)
+      onOpen()
+      trigger(data)
+      reset()
+    })
   }
 
   useEffect(() => {
     if (data) {
-      console.log('Trigger')
       resetMut()
-      toast({
-        title: `Sale listed.`,
-        position: 'top-right',
-        isClosable: true,
-      })
+      setApiCallSuccess(true)
     }
   }, [data])
 
   return (
     <>
       <Base title="Presalano: Launchpad">
+        {txUrl && (
+          <TransactionModal
+            loading={isMutating}
+            explorer={txUrl}
+            isOpen={isOpen}
+            onClose={onClose}
+            info={
+              apiCallSuccess
+                ? 'Your sale is listed'
+                : 'Please wait we are listing your sale!'
+            }
+          />
+        )}
         <Stack minH={'70vh'} direction={{ base: 'column', md: 'row' }}>
           <Flex p={8} flex={1} align={'center'} justify={'center'}>
             <Stack spacing={4} w={'full'} maxW={'md'}>
@@ -93,7 +134,8 @@ export default function Launchpad() {
                   mb="5%"
                   mx="5%"
                   isAnimated
-                ></Progress>
+                />
+
                 {step === 1 ? (
                   <TokenInfoForm
                     register={register}
@@ -113,6 +155,7 @@ export default function Launchpad() {
                     isDisabled={isSubmitting || isMutating}
                   />
                 )}
+
                 <ButtonGroup mt="5%" w="100%">
                   <Flex w="100%" justifyContent="space-between">
                     <Flex>
@@ -131,6 +174,7 @@ export default function Launchpad() {
                       >
                         Back
                       </Button>
+
                       <Button
                         w="7rem"
                         isDisabled={step === 3 || isMutating}
@@ -150,6 +194,7 @@ export default function Launchpad() {
                         Next
                       </Button>
                     </Flex>
+
                     {step === 3 ? (
                       <Button
                         w="7rem"

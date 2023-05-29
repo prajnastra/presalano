@@ -1,0 +1,250 @@
+{
+  "preamble": {
+    "title": "presalano/presalano",
+    "description": "Aiken contracts for project 'presalano/presalano'",
+    "version": "0.0.0",
+    "plutusVersion": "v2",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "presalano.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/presalano~1types~1TradeDatum"
+        }
+      },
+      "redeemer": {
+        "title": "action",
+        "schema": {
+          "$ref": "#/definitions/presalano~1types~1TradeAction"
+        }
+      },
+      "parameters": [
+        {
+          "title": "protocol_key",
+          "schema": {
+            "$ref": "#/definitions/Option$ByteArray"
+          }
+        },
+        {
+          "title": "presale_token",
+          "schema": {
+            "$ref": "#/definitions/presalano~1types~1PresaleToken"
+          }
+        }
+      ],
+      "compiledCode": "5907dd0100003232323232323232323232322222232323232533300e32323232323253330143370e9000000899911919299980c19b87480000044c928980b0010a50301600133009375866024602801090021299980b99baf3301330150014800000c4cdd799809980a800a400866e9520043301c0024bd700a50330103012003480000084ccc8c888c8c94ccc068cdc3a4000002264646600e6eb0cc060c0680192010001375c60420026030004264646464a66603c66e1d20000011324a260380042940c070004cc03cdd61980c180d0032400046464a66603e66e1d20000011324a0603a0042646466e3c018004dd71813000980e801180e8009980c980d9980c980d9980c980d800a40049000240006eb8c084004c060008c060004cc050c05800520003001001222533301b00214a026464a66603266e3c00800c5288999802802800801980f8019bae301d00200633010301200348000c048024cdd2a40006602e6601c6020006900025eb80c05c004c038014c8c8c8c060004c03cc94ccc048cdc3a4000602200220022a660269212a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e00163300437586601a601e6601a601e010900024000466ebccc038c04000520000023016001300d3253330103370e9001180780088008a99808a492a4578706563746564206f6e20696e636f727265637420636f6e7374727563746f722076617269616e742e00163300b300d00648008cc028c0300152000149858c0040048894ccc04c0085300103d87a8000132325333011300300213374a90001980b00125eb804ccc01401400400cc05c00cc054008c8014cc88c94ccc038cdc3a400000226464a666028602e0042649319299980899b87480000044c8c8c8c94ccc064c0700084c9263253330163370e9000000899191919299980f18108010991924c64a66603866e1d20000011323253330223025002132498c94ccc07ccdc3a400000226464a66604a605000426493180b0008a998112481334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e20657870656374656400163026001301d0021533301f3370e90010008991919191919299981498160010a4c2a6604c9201334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375a605400260540046eb4c0a0004c0a0008dd69813000980e8010a9981024812b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301d001153301f4901334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e20657870656374656400163023001301a0031533301c3370e90010008a999810180d0018a4c2a6603a92011d4578706563746564206e6f206669656c647320666f7220436f6e7374720016153301d4912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301a002300f003153301b491334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016301f001301f002301d001301400415330174912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016301400315330164901334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375a603400260340046030002601e0042a660249212b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300f00115330114901334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e20657870656374656400163015001300c002153300f4912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300c001232533300d3370e9000000899192999809980b0010a4c2a66020921334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c602800260160042a66601a66e1d20020011323253330133016002149854cc0412401334c6973742f5475706c652f436f6e73747220636f6e7461696e73206d6f7265206974656d73207468616e2065787065637465640016375c602800260160042a6601c9212b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300b0010043200332533300b3370e90000008a99980798048018a4c2a6601892011d4578706563746564206e6f206669656c647320666f7220436f6e73747200161533300b3370e90010008a99980798048018a4c2a6601892011d4578706563746564206e6f206669656c647320666f7220436f6e7374720016153300c4912b436f6e73747220696e64657820646964206e6f74206d6174636820616e7920747970652076617269616e740016300900233001001480008888cccc01ccdc38008018069199980280299b8000448008c03c0040080088c018dd5000918021baa0015734ae7155ceaab9e5573eae815d0aba21",
+      "hash": "d100a032de4bd4a4c79a8e18916d346f570f38de6d956aedea54a8b7"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "Option$ByteArray": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option$aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
+      "title": "Optional",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "aiken/transaction/credential/Address": {
+      "title": "Address",
+      "description": "A Cardano `Address` typically holding one or two credential references.\n\n Note that legacy bootstrap addresses (a.k.a. 'Byron addresses') are\n completely excluded from Plutus contexts. Thus, from an on-chain\n perspective only exists addresses of type 00, 01, ..., 07 as detailed\n in [CIP-0019 :: Shelley Addresses](https://github.com/cardano-foundation/CIPs/tree/master/CIP-0019/#shelley-addresses).",
+      "anyOf": [
+        {
+          "title": "Address",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "payment_credential",
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
+            },
+            {
+              "title": "stake_credential",
+              "$ref": "#/definitions/Option$aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/transaction/credential/Credential": {
+      "title": "Credential",
+      "description": "A general structure for representing an on-chain `Credential`.\n\n Credentials are always one of two kinds: a direct public/private key\n pair, or a script (native or Plutus).",
+      "anyOf": [
+        {
+          "title": "VerificationKeyCredential",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        },
+        {
+          "title": "ScriptCredential",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
+      "title": "Referenced",
+      "description": "Represent a type of object that can be represented either inline (by hash)\n or via a reference (i.e. a pointer to an on-chain location).\n\n This is mainly use for capturing pointers to a stake credential\n registration certificate in the case of so-called pointer addresses.",
+      "anyOf": [
+        {
+          "title": "Inline",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "Pointer",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "slot_number",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "transaction_index",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "certificate_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/ListingDetails": {
+      "title": "ListingDetails",
+      "anyOf": [
+        {
+          "title": "ListingDetails",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "owner",
+              "$ref": "#/definitions/aiken~1transaction~1credential~1Address"
+            },
+            {
+              "title": "token_per_lovelace",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/PresaleToken": {
+      "title": "PresaleToken",
+      "anyOf": [
+        {
+          "title": "PresaleToken",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "policy_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "asset_name",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "presalano/types/TradeAction": {
+      "title": "TradeAction",
+      "anyOf": [
+        {
+          "title": "Contribute",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Finalize",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "presalano/types/TradeDatum": {
+      "title": "TradeDatum",
+      "anyOf": [
+        {
+          "title": "Listing",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/presalano~1types~1ListingDetails"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

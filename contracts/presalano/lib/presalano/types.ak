@@ -3,10 +3,14 @@ use aiken/transaction.{OutputReference}
 use aiken/transaction/credential.{Address, VerificationKey}
 use aiken/transaction/value.{AssetName, PolicyId, Value}
 
+pub type PublicKeyHash =
+  Hash<Blake2b_224, VerificationKey>
 
-pub type PublicKeyHash = Hash<Blake2b_224, VerificationKey>
-pub type Script = ByteArray
-pub type ScriptHash = Hash<Blake2b_224, Script>
+pub type Script =
+  ByteArray
+
+pub type ScriptHash =
+  Hash<Blake2b_224, Script>
 
 pub type TraitOption {
   Included(ByteArray)
@@ -20,7 +24,7 @@ pub type PresaleToken {
 
 pub type ListingDetails {
   owner: Address,
-  requested_lovelace: Int,
+  token_per_lovelace: Int,
 }
 
 pub type BidOption {
@@ -49,4 +53,3 @@ pub type TradeAction {
 pub type PaymentDatum {
   output_reference: OutputReference,
 }
-

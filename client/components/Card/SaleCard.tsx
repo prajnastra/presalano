@@ -111,6 +111,7 @@ export default function SaleCard({ sale }: Props) {
           fontSize={'sm'}
           textTransform={'uppercase'}
           textAlign={'left'}
+          minH={'50px'}
         >
           {sliceString(sale.description, 100)}
         </Text>
