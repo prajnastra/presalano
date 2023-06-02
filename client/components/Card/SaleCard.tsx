@@ -100,8 +100,8 @@ export default function SaleCard({ sale }: Props) {
             '0 HOURS 0 MINUTES 0 SECONDS'
           ) : (
             <>
-              {Math.floor(timeRemaining ? timeRemaining.asHours() : 0)} hours{' '}
-              {minutesRemaining} minutes {secondsRemaining} seconds{' '}
+              {/* { Math.floor(timeRemaining ? timeRemaining.asHours() : 0)} hours{' '}
+              {minutesRemaining} minutes {secondsRemaining} seconds{' '} */}
             </>
           )}
         </Text>
